@@ -40,6 +40,27 @@ RSpec.describe GuessingGame do
 			end
 		end
 	end
+	
+	describe '#make_guess' do
+  	context 'when a valid guess is made' do
+	    it 'expends a chance' do
+	      expect{game.make_guess(lower_bound)}.to change{game.chances_left}.from(6).to(5)
+	    end
+	    it 'sets the last guess made' do
+	    	game.make_guess(lower_bound)
+	    	expect(game.last_guess).to eq(lower_bound)
+	    end
+		end
+		context 'when an invalid guess is made' do
+			it "doesn't expend a chance" do
+				expect{game.make_guess(lower_bound - 1)}.to_not change{game.chances_left}
+			end
+			it 'sets the last guess made' do
+				game.make_guess(lower_bound - 1)
+				expect(game.last_guess).to eq(lower_bound - 1)
+			end
+	  end
+	end
 
 	describe '#guess_too_high?' do
 		context 'when the guess is too high' do
@@ -65,26 +86,5 @@ RSpec.describe GuessingGame do
 				expect(game.guess_too_low?(upper_bound + 1)).to be false
 			end
 		end
-	end
-
-	describe '#make_guess' do
-  	context 'when a valid guess is made' do
-	    it 'expends a chance' do
-	      expect{game.make_guess(lower_bound)}.to change{game.chances_left}.from(6).to(5)
-	    end
-	    it 'sets the last guess made' do
-	    	game.make_guess(lower_bound)
-	    	expect(game.last_guess).to eq(lower_bound)
-	    end
-		end
-		context 'when an invalid guess is made' do
-			it "doesn't expend a chance" do
-				expect{game.make_guess(lower_bound - 1)}.to_not change{game.chances_left}
-			end
-			it 'sets the last guess made' do
-				game.make_guess(lower_bound - 1)
-				expect(game.last_guess).to eq(lower_bound - 1)
-			end
-	  end
 	end
 end
