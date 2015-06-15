@@ -1,12 +1,19 @@
 class GuessingGame
 	# attr_accessor :user_guess
-	attr_accessor :lower_bound, :upper_bound, :chances_left
+	attr_accessor :lower_bound, :upper_bound, :chances_left, :last_guess
 
 	def initialize(lower_bound, upper_bound)
 		@chances_left = 6
 		@upper_bound = upper_bound
 		@lower_bound = lower_bound
 		@magic_number = rand(lower_bound..upper_bound)
+	end
+
+	def make_guess(guess)
+		@last_guess = guess
+		if valid_guess?(guess)
+			expend_chance
+		end
 	end
 
 	def valid_guess?(guess)
