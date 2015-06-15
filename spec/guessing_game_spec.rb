@@ -40,7 +40,7 @@ RSpec.describe GuessingGame do
 			end
 		end
 	end
-	
+
 	describe '#make_guess' do
   	context 'when a valid guess is made' do
 	    it 'expends a chance' do
@@ -84,6 +84,26 @@ RSpec.describe GuessingGame do
 		context 'when the guess is not too low' do
 			it 'returns false' do
 				expect(game.guess_too_low?(upper_bound + 1)).to be false
+			end
+		end
+	end
+
+	describe '#game_won?' do
+		let(:game) { GuessingGame.new(1,1) }
+		context 'when last guess is correct' do
+			before do
+				game.make_guess(1)
+			end
+			it 'returns true' do
+				expect(game.game_won?).to be true
+			end
+		end
+		context 'when last guess is incorrect' do
+			before do
+				game.make_guess(2)
+			end
+			it 'returns false' do
+				expect(game.game_won?).to be false
 			end
 		end
 	end
