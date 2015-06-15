@@ -28,9 +28,10 @@ class GuessingGame
 		guess < @magic_number
 	end
 
-	def expend_chance
-		unless @chances_left == 0
-			@chances_left -= 1
+	private
+		def expend_chance
+			unless @chances_left == 0
+				@chances_left -= 1
+			end
 		end
-	end
 end

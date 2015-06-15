@@ -87,21 +87,4 @@ end
 			end
 		end
 	end
-
-	describe '#expend_chance' do
-		context 'when there are chances left' do
-			it 'decrements the remaining chances' do
-				expect{game.expend_chance}.to change{game.chances_left}.from(6).to(5)
-			end
-		end
-		context 'when there are no chances left' do
-			before do
-				game.chances_left = 0
-			end
-			it 'does nothing' do
-				expect{game.expend_chance}.to_not change{game.chances_left}
-			end
-		end
-	end
-
 end
