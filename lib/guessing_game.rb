@@ -9,13 +9,6 @@ class GuessingGame
 		@magic_number = rand(lower_bound..upper_bound)
 	end
 
-	def make_guess(guess)
-		@last_guess = guess
-		if valid_guess?(guess)
-			expend_chance
-		end
-	end
-
 	def valid_guess?(guess)
 		guess.between?(@lower_bound, @upper_bound) ? true : false
 	end
@@ -26,6 +19,13 @@ class GuessingGame
 
 	def guess_too_low?(guess)
 		guess < @magic_number
+	end
+	
+	def make_guess(guess)
+		@last_guess = guess
+		if valid_guess?(guess)
+			expend_chance
+		end
 	end
 
 	private
