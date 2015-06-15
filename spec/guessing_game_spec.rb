@@ -107,4 +107,23 @@ RSpec.describe GuessingGame do
 			end
 		end
 	end
+
+  describe '#game_lost?' do
+    context 'when no chances are left' do
+    	let(:game) { GuessingGame.new(1, 100) }
+    	before do
+    		6.times do
+    			game.make_guess(1)
+    		end
+    	end
+      it 'returns true' do
+        expect(game.game_lost?).to be true
+      end
+    end
+    context 'when there are chances left' do
+    	it 'returns false' do
+    		expect(game.game_lost?).to be false
+    	end
+    end
+  end
 end

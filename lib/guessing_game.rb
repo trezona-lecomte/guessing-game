@@ -32,6 +32,10 @@ class GuessingGame
     last_guess_correct?
   end
 
+  def game_lost?
+    @chances_left == 0
+  end
+
 	private
 		def expend_chance
 			unless @chances_left == 0
