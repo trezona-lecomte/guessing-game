@@ -1,5 +1,4 @@
 class GuessingGame
-	# attr_accessor :user_guess
 	attr_accessor :lower_bound, :upper_bound, :chances_left, :last_guess
 
 	def initialize(lower_bound, upper_bound)
@@ -10,11 +9,11 @@ class GuessingGame
 	end
 
 	def valid_guess?(guess)
-		guess.between?(@lower_bound, @upper_bound) ? true : false
+		guess.between?(@lower_bound, @upper_bound)
 	end
 
   def make_guess(guess)
-    @last_guess = guess
+    @last_guess = guess    
     if valid_guess?(guess)
       expend_chance
     end
