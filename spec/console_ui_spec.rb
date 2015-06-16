@@ -39,4 +39,17 @@ RSpec.describe ConsoleUI do
   		expect{ui.say_too_low(lower_bound)}.to output("Sorry, your guess of #{lower_bound} was too low! Try guessing higher.\n").to_stdout
   	end
   end
+
+  describe '#say_game_won' do
+  	it "tells the user they've won the game" do
+  		expect{ui.say_game_won}.to output("Congratulations, you guessed correctly!\n").to_stdout
+  	end
+  end
+
+  describe '#say_game_lost' do
+  	let(:magic_number) { 99 }
+  	it "tells the user they've lost the game" do
+  		expect{ui.say_game_lost(magic_number)}.to output("Oh no! You've run out of chances, so you lose. The number was #{magic_number}.\n").to_stdout
+  	end
+  end
 end
