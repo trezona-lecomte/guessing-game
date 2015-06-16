@@ -13,6 +13,10 @@ class ConsoleUI
 			puts "Sorry, your guess of #{guess} was too high! Try guessing lower."
 		end
 
+		def say_too_low(guess)
+			puts "Sorry, your guess of #{guess} was too low! Try guessing higher."
+		end
+
    	def unicorn
    		puts " *
   *

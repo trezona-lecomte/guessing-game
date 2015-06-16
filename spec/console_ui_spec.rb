@@ -33,4 +33,10 @@ RSpec.describe ConsoleUI do
 			expect{ui.say_too_high(lower_bound)}.to output("Sorry, your guess of #{lower_bound} was too high! Try guessing lower.\n").to_stdout
   	end
   end
+
+  describe '#sat_too_low' do
+  	it "tells the user they've guessed too low" do
+  		expect{ui.say_too_low(lower_bound)}.to output("Sorry, your guess of #{lower_bound} was too low! Try guessing higher.\n").to_stdout
+  	end
+  end
 end
