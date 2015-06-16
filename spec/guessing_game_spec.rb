@@ -10,7 +10,7 @@ RSpec.describe GuessingGame do
 		it 'accepts valid upper and lower bounds' do
 			expect(game).to be_a(GuessingGame)
 		end
-		
+
 		# TODO add negative tests
 	end
 
@@ -99,7 +99,7 @@ RSpec.describe GuessingGame do
 
 	describe '#game_won?' do
 		let(:game) { GuessingGame.new(1, 1) }
-		before 		 { game.make_guess(guess) }		
+		before 		 { game.make_guess(guess) }
 		subject 	 { game.game_won? }
 
 		context 'when last guess is correct' do
