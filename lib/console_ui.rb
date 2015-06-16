@@ -10,19 +10,19 @@ class ConsoleUI
 		end
 
 		def say_too_high(guess)
-			puts "Sorry, your guess of #{guess} was too high! Try guessing lower."
+			puts "\nSorry, your guess of #{guess} was too high! Try guessing lower."
 		end
 
 		def say_too_low(guess)
-			puts "Sorry, your guess of #{guess} was too low! Try guessing higher."
+			puts "\nSorry, your guess of #{guess} was too low! Try guessing higher."
 		end
 
 		def say_game_won
-			puts "Congratulations, you guessed correctly!"
+			puts "\nCongratulations, you guessed correctly!"
 		end
 
 		def say_game_lost(magic_number)
-			puts "Oh no! You've run out of chances, so you lose. The number was #{magic_number}."
+			puts "\nOh no! You've run out of chances, so you lose. The number was #{magic_number}."
 		end
 
    	def unicorn
