@@ -10,6 +10,7 @@ RSpec.describe GuessingGame do
 		it 'accepts valid upper and lower bounds' do
 			expect(game).to be_a(GuessingGame)
 		end
+		
 		# TODO add negative tests
 	end
 
@@ -19,21 +20,25 @@ RSpec.describe GuessingGame do
 				expect(game.valid_guess?(rand(lower_bound..upper_bound))).to be true
 			end
 		end
+
 		context 'with a guess of the lower bound' do
 			it 'returns true' do
 				expect(game.valid_guess?(lower_bound)).to be true
 			end
 		end
+
 		context 'with a guess of the lower bound - 1' do
 			it 'returns false' do
 				expect(game.valid_guess?(lower_bound - 1)).to be false
 			end
 		end
+
 		context 'with a guess of the upper bound' do
 			it 'returns true' do
 				expect(game.valid_guess?(upper_bound)).to be true
 			end
 		end
+
 		context 'with a guess of the upper bound + 1' do
 			it 'returns false' do
 				expect(game.valid_guess?(upper_bound + 1)).to be false
@@ -46,6 +51,7 @@ RSpec.describe GuessingGame do
 	    it 'expends a chance' do
 	      expect{game.make_guess(lower_bound)}.to change{game.chances_left}.from(6).to(5)
 	    end
+
 	    it 'sets the last guess made' do
 	    	game.make_guess(lower_bound)
 	    	expect(game.last_guess).to eq(lower_bound)
@@ -55,6 +61,7 @@ RSpec.describe GuessingGame do
 			it "doesn't expend a chance" do
 				expect{game.make_guess(lower_bound - 1)}.to_not change{game.chances_left}
 			end
+
 			it 'sets the last guess made' do
 				game.make_guess(lower_bound - 1)
 				expect(game.last_guess).to eq(lower_bound - 1)
@@ -68,6 +75,7 @@ RSpec.describe GuessingGame do
 				expect(game.guess_too_high?(upper_bound + 1)).to be true
 			end
 		end
+
 		context 'when the guess is not too high' do
 			it 'returns false' do
 				expect(game.guess_too_high?(lower_bound - 1)).to be false
@@ -81,6 +89,7 @@ RSpec.describe GuessingGame do
 				expect(game.guess_too_low?(lower_bound - 1)).to be true
 			end
 		end
+
 		context 'when the guess is not too low' do
 			it 'returns false' do
 				expect(game.guess_too_low?(upper_bound + 1)).to be false
