@@ -89,24 +89,20 @@ RSpec.describe GuessingGame do
 	end
 
 	describe '#game_won?' do
-		let(:game) { GuessingGame.new(1,1) }
+		let(:game) { GuessingGame.new(1, 1) }
+		before 		 { game.make_guess(guess) }		
+		subject 	 { game.game_won? }
+
 		context 'when last guess is correct' do
-			before do
-				game.make_guess(1)
-			end
-			it 'returns true' do
-				expect(game.game_won?).to be true
-			end
+			let(:guess) { 1 }
+			it { is_expected.to be true }
 		end
+
 		context 'when last guess is incorrect' do
-			before do
-				game.make_guess(2)
-			end
-			it 'returns false' do
-				expect(game.game_won?).to be false
-			end
+			let(:guess) { 2 }
+			it { is_expected.to be false }
 		end
-	end
+	end	
 
   describe '#game_lost?' do
     context 'when no chances are left' do
