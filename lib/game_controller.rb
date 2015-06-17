@@ -11,11 +11,11 @@ class GameController
 		welcome_user
 
 		until @game.won? || @game.lost?
-			@guess = get_guess_from_user
+			@guess = guess_from_user
 
 			@game.make_guess(@guess)
 
-			report_game_status
+			report_guess_result
 		end
 
 		report_game_result
@@ -25,7 +25,7 @@ class GameController
 		@ui.display_welcome_message
 	end
 
-	def get_guess_from_user
+	def guess_from_user
 		@ui.get_guess(@game.lower_bound, @game.upper_bound)
 	end
 

@@ -33,7 +33,7 @@ RSpec.describe GameController, :type => :controller do
     context 'when there is a valid game and ui' do
       it 'gets a guess from the ui' do
       	allow(ui).to receive(:get_guess).and_return(99)
-      	expect(controller.get_guess_from_user).to eq(99)
+      	expect(controller.guess_from_user).to eq(99)
       end
     end
   end
