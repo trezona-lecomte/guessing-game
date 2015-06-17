@@ -1,5 +1,6 @@
 require_relative './guessing_game.rb'
 require_relative './console_ui.rb'
+require_relative './guess.rb'
 
 class GameController
   def initialize(game:, ui: ConsoleUI.new)
@@ -12,33 +13,34 @@ class GameController
     welcome_user
 
     until @game.won? || @game.lost?
-      @guess = guess_from_user
+      user_guess = Guess.new
 
-      @game.make_guess(@guess)
+      until user_guess.valid
+        user_guess.build(range: @game.range, guess_str: guess_str_from_user)
+      end
 
-      report_guess_result
+      @game.try_guess(guess: user_guess)
+
+      @ui.display_guess_result(guess: user_guess)
     end
 
     report_game_result
   end
 
-  def welcome_user
-    @ui.display_welcome_message
-  end
-
-  def guess_from_user
-    @ui.get_guess(@game.lower_bound, @game.upper_bound)
-  end
-
-  def report_guess_result
-    @ui.display_guess_result(@game.last_guess_result)
-  end
-
-  def report_game_result
-    if @game.won?
-      @ui.display_game_won_message
-    elsif @game.lost?
-      @ui.display_game_lost_message(@game.reveal_magic_element)
+  private
+    def welcome_user
+      @ui.display_welcome_message
     end
-  end
+
+    def guess_str_from_user
+      @ui.get_guess_str(range: @game.range)
+    end
+
+    def report_game_result
+      if @game.won?
+        @ui.display_game_won_message
+      elsif @game.lost?
+        @ui.display_game_lost_message(magic_element: @game.reveal_magic_element)
+      end
+    end
 end

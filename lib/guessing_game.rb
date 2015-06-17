@@ -1,24 +1,25 @@
 class GuessingGame
-  attr_reader :chances_left, :lower_bound, :upper_bound, :last_guess_result
+  attr_reader :chances_left, :range, :guesses
 
   def initialize(range: (1..100), chances: 6)
     @range = range
     @chances_left = chances
     @magic_element = rand(@range)
+    @guesses = []
   end
 
-  def make_guess(guess)
-    @last_guess = guess
+  def try_guess(guess:)
+    @guesses.push(guess)
 
-    if @range.include?(guess)
-      update_last_guess_result
+    if @range.include?(guess.value)
+      guess.set_result(other_element: @magic_element)
 
       expend_chance
     end
   end
 
   def won?
-    @last_guess_result == 'correct'
+    @guesses.any? { |guess| guess.correct? }
   end
 
   def lost?
@@ -30,13 +31,6 @@ class GuessingGame
   end
 
   private
-    # TODO is there a DRYer way to set the last_guess_result?
-    def update_last_guess_result
-      @last_guess_result = 'too high' if @last_guess > @magic_element
-      @last_guess_result = 'too low'  if @last_guess < @magic_element
-      @last_guess_result = 'correct'  if @last_guess == @magic_element
-    end
-
     def expend_chance
       unless @chances_left == 0
         @chances_left -= 1
