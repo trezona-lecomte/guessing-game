@@ -1,42 +1,37 @@
 class GuessingGame
-	attr_accessor :lower_bound, :upper_bound, :chances_left, :last_guess
+  attr_reader :chances_left, :lower_bound, :upper_bound
 
-	def initialize(lower_bound, upper_bound)
+  # TODO use range
+	def initialize(lower_bound = 1, upper_bound = 100)
 		@chances_left = 6
 		@upper_bound = upper_bound
 		@lower_bound = lower_bound
 		@magic_number = rand(lower_bound..upper_bound)
 	end
 
-	def valid_guess?(guess)
-		guess.between?(@lower_bound, @upper_bound)
-	end
-
   def make_guess(guess)
-    @last_guess = guess    
-    if valid_guess?(guess)
-      expend_chance
-    end
+    @last_guess = guess
+    expend_chance if guess.between?(@lower_bound, @upper_bound)
   end
 
-	def guess_too_high?(guess)
-		guess > @magic_number
+	def guess_too_high?
+		@last_guess > @magic_number
 	end
 
-	def guess_too_low?(guess)
-		guess < @magic_number
+	def guess_too_low?
+		@last_guess < @magic_number
 	end
 
-  def game_won?
-    last_guess_correct?
+  def won?
+    @last_guess == @magic_number
   end
 
-  def game_lost?
+  def lost?
     @chances_left == 0
   end
 
   def reveal_magic_number
-    @magic_number
+    @magic_number if won? || lost?
   end
 
 	private
@@ -45,8 +40,4 @@ class GuessingGame
 				@chances_left -= 1
 			end
 		end
-
-    def last_guess_correct?
-      @last_guess == @magic_number
-    end
 end
