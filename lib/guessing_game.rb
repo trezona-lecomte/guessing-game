@@ -9,7 +9,6 @@ class GuessingGame
 		@magic_number = rand(lower_bound..upper_bound)
 	end
 
-	# TODO is there a DRYer way to set the last_guess_result?
   def make_guess(guess)
     @last_guess = guess
 
@@ -33,6 +32,7 @@ class GuessingGame
   end
 
 	private
+		# TODO is there a DRYer way to set the last_guess_result?
 		def update_last_guess_result
     	@last_guess_result = 'too high' if @last_guess > @magic_number
     	@last_guess_result = 'too low'  if @last_guess < @magic_number
