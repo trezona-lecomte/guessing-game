@@ -6,9 +6,9 @@ RSpec.describe ConsoleUI do
 	let(:upper_bound) { 100 }
 	let(:ui) { ConsoleUI.new }
 
-  describe '#welcome' do
+  describe '#display_welcome_message' do
     it 'welcomes the user' do
-      expect{ui.welcome}.to output("Welcome to the magical number guessing game!\n").to_stdout
+      expect{ui.display_welcome_message}.to output("Welcome to the magical number guessing game!\n").to_stdout
     end
   end
 
@@ -28,28 +28,28 @@ RSpec.describe ConsoleUI do
     end
   end
 
-  describe '#say_too_high' do
+  describe '#display_too_high_message' do
   	it "tells the user they've guessed too high" do
-			expect{ui.say_too_high(lower_bound)}.to output("\nSorry, your guess of #{lower_bound} was too high! Try guessing lower.\n").to_stdout
+			expect{ui.display_too_high_message(lower_bound)}.to output("\nYour guess of #{lower_bound} was too high!\n").to_stdout
   	end
   end
 
-  describe '#sat_too_low' do
+  describe '#display_too_low_message' do
   	it "tells the user they've guessed too low" do
-  		expect{ui.say_too_low(lower_bound)}.to output("\nSorry, your guess of #{lower_bound} was too low! Try guessing higher.\n").to_stdout
+  		expect{ui.display_too_low_message(lower_bound)}.to output("\nYour guess of #{lower_bound} was too low!\n").to_stdout
   	end
   end
 
-  describe '#say_game_won' do
+  describe '#display_game_won_message' do
   	it "tells the user they've won the game" do
-  		expect{ui.say_game_won}.to output("\nCongratulations, you guessed correctly!\n").to_stdout
+  		expect{ui.display_game_won_message}.to output("\nCongratulations, you guessed correctly!\n").to_stdout
   	end
   end
 
-  describe '#say_game_lost' do
+  describe '#display_game_lost_message' do
   	let(:magic_number) { 99 }
   	it "tells the user they've lost the game" do
-  		expect{ui.say_game_lost(magic_number)}.to output("\nOh no! You've run out of chances, so you lose. The number was #{magic_number}.\n").to_stdout
+  		expect{ui.display_game_lost_message(magic_number)}.to output("\nOh no! You've run out of chances, so you lose. The number was #{magic_number}.\n").to_stdout
   	end
   end
 end

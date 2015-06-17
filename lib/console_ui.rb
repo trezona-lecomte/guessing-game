@@ -1,6 +1,6 @@
 class ConsoleUI
 
-		def welcome
+		def display_welcome_message
 			puts "Welcome to the magical number guessing game!"
 		end
 
@@ -9,23 +9,23 @@ class ConsoleUI
    		Integer(STDIN.gets.chomp) rescue nil
 		end
 
-		def say_too_high(guess)
-			puts "\nSorry, your guess of #{guess} was too high! Try guessing lower."
+		def display_too_high_message(guess)
+			puts "\nYour guess of #{guess} was too high!"
 		end
 
-		def say_too_low(guess)
-			puts "\nSorry, your guess of #{guess} was too low! Try guessing higher."
+		def display_too_low_message(guess)
+			puts "\nYour guess of #{guess} was too low!"
 		end
 
-		def say_game_won
+		def display_game_won_message
 			puts "\nCongratulations, you guessed correctly!"
 		end
 
-		def say_game_lost(magic_number)
+		def display_game_lost_message(magic_number)
 			puts "\nOh no! You've run out of chances, so you lose. The number was #{magic_number}."
 		end
 
-   	def unicorn
+   	def display_unicorn
    		puts " *
   *
    *     **
