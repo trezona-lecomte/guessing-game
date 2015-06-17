@@ -19,14 +19,6 @@ class GuessingGame
     end
   end
 
-	def guess_too_high?
-		@last_guess > @magic_number
-	end
-
-	def guess_too_low?
-		@last_guess < @magic_number
-	end
-
   def won?
     @last_guess_result == 'correct'
   end
