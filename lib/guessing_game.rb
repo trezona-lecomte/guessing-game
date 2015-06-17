@@ -1,9 +1,9 @@
 class GuessingGame
   attr_reader :chances_left, :lower_bound, :upper_bound, :last_guess_result
 
-  def initialize(range: (1..100))
+  def initialize(range: (1..100), chances: 6)
     @range = range
-    @chances_left = 6
+    @chances_left = chances
     @magic_element = rand(@range)
   end
 
