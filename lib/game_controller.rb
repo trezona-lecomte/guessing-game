@@ -17,6 +17,8 @@ class GameController
 
 			report_game_status
 		end
+
+		report_game_result
 	end
 
 	def welcome_user
@@ -27,14 +29,15 @@ class GameController
 		@ui.get_guess(@game.lower_bound, @game.upper_bound)
 	end
 
-	# def report_game_status
-	# 	@ui.display_too_high_message(@guess) if @game.guess_too_high?
-	# 	@ui.display_too_low_message(@guess)  if @game.guess_too_low?
-	# 	if @game.won?
-	# 		@ui.display_game_won_message
-	# 		@ui.display_unicorn
-	# 	elsif	@game.lost?
-	# 		@ui.display_game_lost_message(@game.reveal_magic_number)
-	# 	end
-	# end
+	def report_guess_result
+		@ui.display_guess_result(@game.last_guess_result)
+	end
+
+	def report_game_result
+		if @game.won?
+			@ui.display_game_won_message
+		elsif	@game.lost?
+			@ui.display_game_lost_message(@game.reveal_magic_number)
+		end
+	end
 end
