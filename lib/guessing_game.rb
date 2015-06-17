@@ -1,5 +1,5 @@
 class GuessingGame
-  attr_reader :chances_left, :lower_bound, :upper_bound
+  attr_reader :chances_left, :lower_bound, :upper_bound, :last_guess_result
 
   # TODO use range
 	def initialize(lower_bound = 1, upper_bound = 100)
@@ -11,7 +11,12 @@ class GuessingGame
 
   def make_guess(guess)
     @last_guess = guess
-    expend_chance if guess.between?(@lower_bound, @upper_bound)
+    if guess.between?(@lower_bound, @upper_bound)
+    	@last_guess_result = 'too high' if @last_guess > @magic_number
+    	@last_guess_result = 'too low'  if @last_guess < @magic_number
+    	@last_guess_result = 'correct'	if @last_guess == @magic_number
+    	expend_chance
+    end
   end
 
 	def guess_too_high?
@@ -23,7 +28,7 @@ class GuessingGame
 	end
 
   def won?
-    @last_guess == @magic_number
+    @last_guess_result == 'correct'
   end
 
   def lost?

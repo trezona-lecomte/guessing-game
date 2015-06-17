@@ -54,47 +54,78 @@ RSpec.describe GuessingGame do
 	  end
 	end
 
-	describe '#guess_too_high?' do
+	describe '#last_guess_result' do
 		before do
 			game.instance_variable_set("@magic_number", upper_bound - 1)
 			game.make_guess(guess)
 		end
 
-		context 'when the guess is too high' do
+		context 'when the guess was too high' do
 			let(:guess) { upper_bound }
-			it 'returns true' do
-				expect(game.guess_too_high?).to be true
+
+			it "returns 'too high'" do
+				expect(game.last_guess_result).to eq('too high')
 			end
 		end
 
-		context 'when the guess is not too high' do
+		context 'when the guess was too low' do
 			let(:guess) { upper_bound - 2 }
-			it 'returns false' do
-				expect(game.guess_too_high?).to be false
+
+			it "returns 'too low'" do
+				expect(game.last_guess_result).to eq('too low')
+			end
+		end
+
+		context 'when the guess was correct' do
+			let(:guess) { upper_bound - 1 }
+
+			it "returns 'correct'" do
+				expect(game.last_guess_result).to eq('correct')
 			end
 		end
 	end
 
-	describe '#guess_too_low?' do
-		before do
-			game.instance_variable_set("@magic_number", lower_bound + 1)
-			game.make_guess(guess)
-		end
+	# describe '#guess_too_high?' do
+	# 	before do
+	# 		game.instance_variable_set("@magic_number", upper_bound - 1)
+	# 		game.make_guess(guess)
+	# 	end
 
-		context 'when the guess is too low' do
-			let(:guess) { lower_bound }
-			it 'returns true' do
-				expect(game.guess_too_low?).to be true
-			end
-		end
+	# 	context 'when the guess is too high' do
+	# 		let(:guess) { upper_bound }
+	# 		it 'returns true' do
+	# 			expect(game.guess_too_high?).to be true
+	# 		end
+	# 	end
 
-		context 'when the guess is not too low' do
-			let(:guess) { lower_bound + 2 }
-			it 'returns false' do
-				expect(game.guess_too_low?).to be false
-			end
-		end
-	end
+	# 	context 'when the guess is not too high' do
+	# 		let(:guess) { upper_bound - 2 }
+	# 		it 'returns false' do
+	# 			expect(game.guess_too_high?).to be false
+	# 		end
+	# 	end
+	# end
+
+	# describe '#guess_too_low?' do
+	# 	before do
+	# 		game.instance_variable_set("@magic_number", lower_bound + 1)
+	# 		game.make_guess(guess)
+	# 	end
+
+	# 	context 'when the guess is too low' do
+	# 		let(:guess) { lower_bound }
+	# 		it 'returns true' do
+	# 			expect(game.guess_too_low?).to be true
+	# 		end
+	# 	end
+
+	# 	context 'when the guess is not too low' do
+	# 		let(:guess) { lower_bound + 2 }
+	# 		it 'returns false' do
+	# 			expect(game.guess_too_low?).to be false
+	# 		end
+	# 	end
+	# end
 
 	describe '#game_won?' do
 		let(:game) { GuessingGame.new(1, 1) }
