@@ -38,7 +38,7 @@ class GameController
     if @game.won?
       @ui.display_game_won_message
     elsif @game.lost?
-      @ui.display_game_lost_message(@game.reveal_magic_number)
+      @ui.display_game_lost_message(@game.reveal_magic_element)
     end
   end
 end

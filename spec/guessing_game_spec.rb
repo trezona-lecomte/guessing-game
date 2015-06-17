@@ -3,7 +3,7 @@ require 'guessing_game'
 
 RSpec.describe GuessingGame do
   let(:range) { (1..100) }
-  let(:game) { GuessingGame.new(range) }
+  let(:game) { GuessingGame.new(range: range) }
 
   describe '#make_guess' do
     context 'when a valid guess is made' do
@@ -73,7 +73,7 @@ RSpec.describe GuessingGame do
   end
 
   describe '#game_won?' do
-    let(:game) { GuessingGame.new(1..1) }
+    let(:game) { GuessingGame.new(range: (1..1)) }
     before     { game.make_guess(guess) }
     subject    { game.won? }
 
