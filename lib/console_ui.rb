@@ -9,13 +9,9 @@ class ConsoleUI
    		Integer(STDIN.gets.chomp) rescue nil
 		end
 
-		def display_too_high_message(guess)
-			puts "\nYour guess of #{guess} was too high!"
-		end
-
-		def display_too_low_message(guess)
-			puts "\nYour guess of #{guess} was too low!"
-		end
+    def display_guess_result(result)
+      puts "\nYour guess was #{result}!"
+    end
 
 		def display_game_won_message
 			puts "\nCongratulations, you guessed correctly!"

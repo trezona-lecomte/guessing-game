@@ -28,22 +28,24 @@ RSpec.describe ConsoleUI do
     end
   end
 
-  describe '#display_too_high_message' do
-  	it "tells the user they've guessed too high" do
-			expect{ui.display_too_high_message(lower_bound)}.to output("\nYour guess of #{lower_bound} was too high!\n").to_stdout
-  	end
-  end
+  describe '#display_guess_result' do
+    context 'when the guess was too high' do
+      it 'displays the too high message' do
+        expect{ui.display_guess_result('too high')}.to output("\nYour guess was too high!\n").to_stdout
+      end
+    end
 
-  describe '#display_too_low_message' do
-  	it "tells the user they've guessed too low" do
-  		expect{ui.display_too_low_message(lower_bound)}.to output("\nYour guess of #{lower_bound} was too low!\n").to_stdout
-  	end
-  end
+    context 'when the guess was too low' do
+      it 'displays the too high message' do
+        expect{ui.display_guess_result('too low')}.to output("\nYour guess was too low!\n").to_stdout
+      end
+    end
 
-  describe '#display_game_won_message' do
-  	it "tells the user they've won the game" do
-  		expect{ui.display_game_won_message}.to output("\nCongratulations, you guessed correctly!\n").to_stdout
-  	end
+    context 'when the guess was correct' do
+      it 'displays the too high message' do
+        expect{ui.display_guess_result('correct')}.to output("\nYour guess was correct!\n").to_stdout
+      end
+    end
   end
 
   describe '#display_game_lost_message' do
