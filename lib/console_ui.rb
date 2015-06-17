@@ -6,8 +6,16 @@ class ConsoleUI
 
     # TODO move cast/rescue parser/validator
     def get_guess(lower_bound, upper_bound)
-      puts "Please enter a number between #{lower_bound} and #{upper_bound}"
-      STDIN.gets.chomp
+      valid_guess = false
+
+      until valid_guess
+        puts "Please enter a number between #{lower_bound} and #{upper_bound}"
+
+        valid_guess = Integer (STDIN.gets.chomp) rescue nil
+        valid_guess = nil unless valid_guess.between?(lower_bound, upper_bound) rescue nil
+      end
+
+      valid_guess
     end
 
     # TODO handle no result

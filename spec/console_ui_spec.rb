@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'console_ui'
+require 'byebug'
 
 RSpec.describe ConsoleUI do
   let(:lower_bound) { 1 }
@@ -13,10 +14,25 @@ RSpec.describe ConsoleUI do
   end
 
   describe '#get_guess' do
+    context 'before getting the guess' do
+      it 'prompts the user for their guess' do
+        allow(STDIN).to receive(:gets) { "99" }
+        expect{ui.get_guess(lower_bound, upper_bound)}.to output("Please enter a number between #{lower_bound} and #{upper_bound}\n").to_stdout
+      end
+    end
+
     context 'when given a valid guess' do
-      it 'returns guess as a string from STDIN' do
-        allow(STDIN).to receive(:gets) { "9999" }
-        expect(ui.get_guess(lower_bound, upper_bound)).to eq("9999")
+      it 'returns guess as an integer from stdin' do
+        allow(STDIN).to receive(:gets) { "99" }
+        expect(ui.get_guess(lower_bound, upper_bound)).to eq(99)
+      end
+    end
+
+    context 'when given an invalid guess' do
+      it 'asks the user for another guess' do
+        allow(STDIN).to receive(:gets).once { "Womack! Why am I not surprised, you piece of shit!" }
+        # byebug
+        expect{ui.get_guess(lower_bound, upper_bound)}.to output("Please enter a number between #{lower_bound} and #{upper_bound}\n").twice.to_stdout
       end
     end
   end
