@@ -2,39 +2,26 @@ require 'spec_helper'
 require 'guessing_game'
 
 RSpec.describe GuessingGame do
-  let(:lower_bound) { 1 }
-  let(:upper_bound) { 5000 }
-  let(:game) { GuessingGame.new(lower_bound, upper_bound) }
-
-  describe '#initialize' do
-    it 'accepts valid upper and lower bounds' do
-      expect(game).to be_a(GuessingGame)
-    end
-
-    let(:game) { GuessingGame.new }
-
-    it 'provides default arguments' do
-      expect(game).to be_a(GuessingGame)
-    end
-  end
+  let(:range) { (1..100) }
+  let(:game) { GuessingGame.new(range) }
 
   describe '#make_guess' do
     context 'when a valid guess is made' do
       context 'with a guess of the lower bound' do
         it 'expends a chance' do
-          expect{game.make_guess(lower_bound)}.to change{game.chances_left}.from(6).to(5)
+          expect{game.make_guess(range.first)}.to change{game.chances_left}.from(6).to(5)
         end
       end
 
       context 'with a guess of the upper bound' do
         it 'expends a chance' do
-          expect{game.make_guess(upper_bound)}.to change{game.chances_left}.from(6).to(5)
+          expect{game.make_guess(range.last)}.to change{game.chances_left}.from(6).to(5)
         end
       end
 
       context 'with a random guess' do
         it 'expends a chance' do
-          expect{game.make_guess(rand(lower_bound..upper_bound))}.to change{game.chances_left}.from(6).to(5)
+          expect{game.make_guess(rand(range.first..range.last))}.to change{game.chances_left}.from(6).to(5)
         end
       end
     end
@@ -42,13 +29,13 @@ RSpec.describe GuessingGame do
     context 'when an invalid guess is made' do
       context 'with a guess of the lower bound - 1' do
         it "doesn't expend a chance" do
-          expect{game.make_guess(lower_bound - 1)}.to_not change{game.chances_left}
+          expect{game.make_guess(range.first - 1)}.to_not change{game.chances_left}
         end
       end
 
       context 'with a guess of the upper bound + 1' do
         it "doesn't expend a chance" do
-          expect{game.make_guess(upper_bound + 1)}.to_not change{game.chances_left}
+          expect{game.make_guess(range.last + 1)}.to_not change{game.chances_left}
         end
       end
     end
@@ -56,12 +43,12 @@ RSpec.describe GuessingGame do
 
   describe '#last_guess_result' do
     before do
-      game.instance_variable_set("@magic_number", upper_bound - 1)
+      game.instance_variable_set("@magic_element", range.last - 1)
       game.make_guess(guess)
     end
 
     context 'when the guess was too high' do
-      let(:guess) { upper_bound }
+      let(:guess) { range.last }
 
       it "returns 'too high'" do
         expect(game.last_guess_result).to eq('too high')
@@ -69,7 +56,7 @@ RSpec.describe GuessingGame do
     end
 
     context 'when the guess was too low' do
-      let(:guess) { upper_bound - 2 }
+      let(:guess) { range.last - 2 }
 
       it "returns 'too low'" do
         expect(game.last_guess_result).to eq('too low')
@@ -77,7 +64,7 @@ RSpec.describe GuessingGame do
     end
 
     context 'when the guess was correct' do
-      let(:guess) { upper_bound - 1 }
+      let(:guess) { range.last - 1 }
 
       it "returns 'correct'" do
         expect(game.last_guess_result).to eq('correct')
@@ -86,7 +73,7 @@ RSpec.describe GuessingGame do
   end
 
   describe '#game_won?' do
-    let(:game) { GuessingGame.new(1, 1) }
+    let(:game) { GuessingGame.new(1..1) }
     before     { game.make_guess(guess) }
     subject    { game.won? }
 

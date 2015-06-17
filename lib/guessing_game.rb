@@ -1,18 +1,16 @@
 class GuessingGame
   attr_reader :chances_left, :lower_bound, :upper_bound, :last_guess_result
 
-  # TODO use range instead of lower/upper bounds
-  def initialize(lower_bound = 1, upper_bound = 100)
+  def initialize(range)
+    @range = range
     @chances_left = 6
-    @upper_bound = upper_bound
-    @lower_bound = lower_bound
-    @magic_number = rand(lower_bound..upper_bound)
+    @magic_element = rand(@range)
   end
 
   def make_guess(guess)
     @last_guess = guess
 
-    if guess.between?(@lower_bound, @upper_bound)
+    if @range.include?(guess)
       update_last_guess_result
 
       expend_chance
@@ -27,16 +25,16 @@ class GuessingGame
     !won? && @chances_left == 0
   end
 
-  def reveal_magic_number
-    @magic_number if won? || lost?
+  def reveal_magic_element
+    @magic_element if won? || lost?
   end
 
   private
     # TODO is there a DRYer way to set the last_guess_result?
     def update_last_guess_result
-      @last_guess_result = 'too high' if @last_guess > @magic_number
-      @last_guess_result = 'too low'  if @last_guess < @magic_number
-      @last_guess_result = 'correct'  if @last_guess == @magic_number
+      @last_guess_result = 'too high' if @last_guess > @magic_element
+      @last_guess_result = 'too low'  if @last_guess < @magic_element
+      @last_guess_result = 'correct'  if @last_guess == @magic_element
     end
 
     def expend_chance
