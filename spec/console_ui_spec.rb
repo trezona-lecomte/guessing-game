@@ -66,6 +66,13 @@ RSpec.describe ConsoleUI do
     end
   end
 
+  describe '#display_chances_left' do
+    it 'displays the chances left' do
+      expect{ui.display_chances_left(5)}.to output("You have 5 chances left.\n\n").to_stdout
+      expect{ui.display_chances_left(99)}.to output("You have 99 chances left.\n\n").to_stdout
+    end
+  end
+
   describe '#display_game_lost_message' do
     let(:magic_number) { 99 }
     it "tells the user they've lost the game" do

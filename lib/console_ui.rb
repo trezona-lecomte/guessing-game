@@ -4,7 +4,6 @@ class ConsoleUI
       puts "Welcome to the magical guessing game!"
     end
 
-    # TODO pass first and last rather than range
     def get_guess_str(first, last)
       puts "Please enter a guess between #{first} and #{last}"
 
@@ -13,6 +12,10 @@ class ConsoleUI
 
     def display_guess_result(guess:)
       puts "\nYour guess was #{guess.result}!"
+    end
+
+    def display_chances_left(chances)
+      puts "You have #{chances} chances left.\n\n"
     end
 
     def display_game_won_message
