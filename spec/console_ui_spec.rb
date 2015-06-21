@@ -9,7 +9,7 @@ RSpec.describe ConsoleUI do
 
   describe '#display_welcome_message' do
     it 'welcomes the user' do
-      expect{ui.display_welcome_message}.to output("Welcome to the magical number guessing game!\n").to_stdout
+      expect{ui.display_welcome_message}.to output("Welcome to the magical guessing game!\n").to_stdout
     end
   end
 
@@ -17,28 +17,28 @@ RSpec.describe ConsoleUI do
     context 'before getting the guess' do
       it 'prompts the user for their guess' do
         allow(STDIN).to receive(:gets) { "99" }
-        expect{ui.get_guess_str(range: range)}.to output("Please enter a number between #{range.first} and #{range.last}\n").to_stdout
+        expect{ui.get_guess_str(range.first, range.last)}.to output("Please enter a guess between #{range.first} and #{range.last}\n").to_stdout
       end
     end
 
     context 'when given a number' do
       it 'returns a string containing the number' do
         allow(STDIN).to receive(:gets) { "99\n" }
-        expect(ui.get_guess_str(range: range)).to eq("99")
+        expect(ui.get_guess_str(range.first, range.last)).to eq("99")
       end
     end
 
     context 'when given a character' do
       it 'returns a string containing the character' do
         allow(STDIN).to receive(:gets) { "a\n" }
-        expect(ui.get_guess_str(range: range)).to eq('a')
+        expect(ui.get_guess_str(range.first, range.last)).to eq('a')
       end
     end
 
     context 'when given a blank line' do
       it 'returns a blank string' do
         allow(STDIN).to receive(:gets) { "\n" }
-        expect(ui.get_guess_str(range: range)).to eq("")
+        expect(ui.get_guess_str(range.first, range.last)).to eq("")
       end
     end
   end
@@ -69,7 +69,7 @@ RSpec.describe ConsoleUI do
   describe '#display_game_lost_message' do
     let(:magic_number) { 99 }
     it "tells the user they've lost the game" do
-      expect{ui.display_game_lost_message(magic_element: magic_number)}.to output("\nOh no! You've run out of chances, so you lose. The number was #{magic_number}.\n").to_stdout
+      expect{ui.display_game_lost_message(magic_element: magic_number)}.to output("\nOh no! You've run out of chances, so you lose. You were trying to guess: #{magic_number}.\n").to_stdout
     end
   end
 end
