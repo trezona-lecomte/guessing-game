@@ -7,19 +7,6 @@ RSpec.describe GameController, :type => :controller do
   let(:ui)         { ConsoleUI.new }
   let(:controller) { GameController.new(game: game, ui: ui) }
 
-  describe '#initialize' do
-    it 'accepts a game and a UI' do
-      controller = GameController.new(game: game, ui: ui)
-      expect(controller.instance_variable_get(:@ui)).to eq(ui)
-      expect(controller.instance_variable_get(:@game)).to eq(game)
-    end
-
-    it 'provides a ConsoleUI by default' do
-      controller = GameController.new(game: game)
-      expect(controller.instance_variable_get(:@ui)).to be_a(ConsoleUI)
-    end
-  end
-
   describe '#welcome_user' do
     context 'when __context__' do
       it 'tells the UI to display a welcome message' do
@@ -29,24 +16,26 @@ RSpec.describe GameController, :type => :controller do
     end
   end
 
-  describe '#play_game' do
-    it ''
-  end
+  # TODO find out how to test the play_game method!
+  # describe '#play_game' do
+  #   it 'gets a guess from the user' do
+  #     byebug
+  #     allow(ui).to receive(:get_guess_str).and_return('99')
 
-  # TODO negative tests for non-string
-  describe '#get_guess_from_user' do
-    context 'when there is a valid game and ui' do
-      it 'gets a guess from the ui' do
-        allow(ui).to receive(:get_guess).and_return(99)
-        expect(controller.guess_from_user).to eq(99)
-      end
-    end
-  end
+  #     expect(ui).to receive(:display_welcome_message)
+  #     expect(ui).to receive(:get_guess_str)
+  #     expect(game).to receive(:try_guess)
+  #     expect(ui).to receive(:display_guess_result)
 
-  describe '#report_guess_result' do
-    it 'tells the UI to display the guess result' do
-      expect(ui).to receive(:display_guess_result)
-      controller.report_guess_result
+  #     controller.play_game
+  #   end
+  # end
+
+  describe '#guess_str_from_user' do
+    it 'gets a guess from the ui' do
+      allow(ui).to receive(:get_guess_str).and_return('99')
+
+      expect(controller.guess_str_from_user).to eq('99')
     end
   end
 
@@ -54,15 +43,19 @@ RSpec.describe GameController, :type => :controller do
     context 'when the game is won' do
       it 'tells the UI to display the game won message' do
         allow(game).to receive(:won?).and_return(true)
+
         expect(ui).to receive(:display_game_won_message)
+
         controller.report_game_result
       end
     end
 
     context 'when the game is lost' do
-      it 'tells the UI to display the game lost message' do
+      it 'tells the UI to display the game lost message with answer' do
         allow(game).to receive(:lost?).and_return(true)
-        expect(ui).to receive(:display_game_lost_message)
+
+        expect(ui).to receive(:display_game_lost_message).with(magic_element: game.reveal_magic_element)
+
         controller.report_game_result
       end
     end
