@@ -8,11 +8,11 @@ class GuessingGame
     @guesses = []
   end
 
-  def try_guess(guess:)
+  def try_guess(guess)
     @guesses.push(guess)
 
     if @range.include?(guess.value)
-      guess.set_result(other_element: @magic_element)
+      guess.set_result_of_comparison(other_value: @magic_element)
 
       expend_chance
     end
@@ -23,7 +23,7 @@ class GuessingGame
   end
 
   def lost?
-    !won? && @chances_left == 0
+    @chances_left == 0 && !won?
   end
 
   def reveal_magic_element
