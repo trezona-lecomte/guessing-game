@@ -1,32 +1,18 @@
-require 'byebug'
-
 class Guess
-  attr_reader :valid, :value, :result
+  attr_reader :value, :result
 
-  def build(range:, guess_str:)
-    begin
-      case range.first.class.to_s
-
-      when 'Fixnum', 'Bignum'
-        @value = Integer(guess_str)
-        @valid = true
-
-      when 'String'
-        @value = guess_str
-        @valid = true
-
-      else
-        raise Exception
-      end
-    rescue Exception
-      @valid = false
-    end
+  def initialize(value)
+    @value = value
   end
 
-  def set_result(other_element:)
-    @result = 'too high' if @value  > other_element
-    @result = 'too low'  if @value  < other_element
-    @result = 'correct'  if @value == other_element
+  def set_result_of_comparison(other_value:)
+    begin
+      @result = 'too high' if @value  > other_value
+      @result = 'too low'  if @value  < other_value
+      @result = 'correct'  if @value == other_value
+    rescue
+      @result = 'invalid'
+    end
   end
 
   def too_high?
