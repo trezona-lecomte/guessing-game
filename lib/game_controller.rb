@@ -24,6 +24,8 @@ class GameController
       @game.try_guess(guess)
 
       @ui.display_guess_result(guess: guess)
+
+      @ui.display_chances_left(@game.chances_left)
     end
 
     report_game_result
