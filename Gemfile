@@ -1,6 +1,8 @@
-# A sample Gemfile
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-gem "rspec"
-gem "byebug"
-gem "rake-notes"
+group :test do
+  gem 'rspec'
+  gem 'byebug'
+  gem 'rake-notes'
+  gem 'metric_fu'
+end
