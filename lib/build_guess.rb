@@ -1,4 +1,4 @@
-require_relative './guess.rb'
+require_relative 'guess'
 
 class BuildGuess
 
@@ -15,6 +15,7 @@ class BuildGuess
     rescue
       guess = nil
     end
+
     guess
   end
 end

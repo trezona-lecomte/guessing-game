@@ -1,10 +1,10 @@
-require_relative './guessing_game.rb'
-require_relative './console_ui.rb'
-require_relative './guess.rb'
-require_relative './build_guess.rb'
+require_relative 'build_guess'
+require_relative 'console_ui'
+require_relative 'guess'
+require_relative 'guessing_game'
 
 class GameController
-  def initialize(game:, ui: ConsoleUI.new)
+  def initialize(game:, ui:)
     @game = game
     @range = @game.range
     @ui = ui
@@ -17,12 +17,12 @@ class GameController
       guess = nil
 
       until guess
-        guess = BuildGuess.call(range: @range, guess_str: guess_str_from_user)
+        guess = new_guess
       end
 
       @game.try_guess(guess)
 
-      @ui.display_guess_result(guess: guess)
+      @ui.display_guess_result(guess.result)
 
       @ui.display_chances_left(@game.chances_left)
     end
@@ -30,20 +30,21 @@ class GameController
     report_game_result
   end
 
-  def welcome_user
-    @ui.display_welcome_message
-  end
-
-  def guess_str_from_user
-    @ui.get_guess_str(@range.first, @range.last)
-  end
-
-  def report_game_result
-    if @game.won?
-      @ui.display_game_won_message
-      @ui.display_unicorn
-    elsif @game.lost?
-      @ui.display_game_lost_message(magic_element: @game.reveal_magic_element)
+  private
+    def welcome_user
+      @ui.display_welcome_message
     end
-  end
+
+    def new_guess
+      BuildGuess.call(range: @range, guess_str: @ui.get_guess_str(@range.first, @range.last))
+    end
+
+    def report_game_result
+      if @game.won?
+        @ui.display_game_won_message
+        @ui.display_unicorn
+      elsif @game.lost?
+        @ui.display_game_lost_message(hidden_value: @game.reveal_hidden_value)
+      end
+    end
 end
