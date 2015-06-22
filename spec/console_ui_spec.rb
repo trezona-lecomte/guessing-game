@@ -47,21 +47,21 @@ RSpec.describe ConsoleUI do
     context 'when the guess was too high' do
       it 'displays the too high message' do
         allow(guess).to receive(:result).and_return('too high')
-        expect{ui.display_guess_result(guess: guess)}.to output("\nYour guess was too high!\n").to_stdout
+        expect{ui.display_guess_result(guess.result)}.to output("\nYour guess was too high!\n").to_stdout
       end
     end
 
     context 'when the guess was too low' do
       it 'displays the too low message' do
         allow(guess).to receive(:result).and_return('too low')
-        expect{ui.display_guess_result(guess: guess)}.to output("\nYour guess was too low!\n").to_stdout
+        expect{ui.display_guess_result(guess.result)}.to output("\nYour guess was too low!\n").to_stdout
       end
     end
 
     context 'when the guess was correct' do
       it 'displays the correct message' do
         allow(guess).to receive(:result).and_return('correct')
-        expect{ui.display_guess_result(guess: guess)}.to output("\nYour guess was correct!\n").to_stdout
+        expect{ui.display_guess_result(guess.result)}.to output("\nYour guess was correct!\n").to_stdout
       end
     end
   end
@@ -74,9 +74,9 @@ RSpec.describe ConsoleUI do
   end
 
   describe '#display_game_lost_message' do
-    let(:magic_number) { 99 }
+    let(:value) { 99 }
     it "tells the user they've lost the game" do
-      expect{ui.display_game_lost_message(magic_element: magic_number)}.to output("\nOh no! You've run out of chances, so you lose. You were trying to guess: #{magic_number}.\n").to_stdout
+      expect{ui.display_game_lost_message(hidden_value: value)}.to output("\nOh no! You've run out of chances, so you lose. You were trying to guess: #{value}.\n").to_stdout
     end
   end
 end

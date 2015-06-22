@@ -10,8 +10,8 @@ class ConsoleUI
       STDIN.gets.chomp
     end
 
-    def display_guess_result(guess:)
-      puts "\nYour guess was #{guess.result}!"
+    def display_guess_result(result)
+      puts "\nYour guess was #{result}!"
     end
 
     def display_chances_left(chances)
@@ -22,8 +22,8 @@ class ConsoleUI
       puts "\nCongratulations, you guessed correctly!"
     end
 
-    def display_game_lost_message(magic_element:)
-      puts "\nOh no! You've run out of chances, so you lose. You were trying to guess: #{magic_element}."
+    def display_game_lost_message(hidden_value:)
+      puts "\nOh no! You've run out of chances, so you lose. You were trying to guess: #{hidden_value}."
     end
 
     def display_unicorn
@@ -47,5 +47,5 @@ class ConsoleUI
        **                                     ****
       **                                       ***
      ***                                     ****"
-    end
+  end
 end

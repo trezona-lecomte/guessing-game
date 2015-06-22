@@ -125,12 +125,12 @@ RSpec.describe GuessingGame do
     end
   end
 
-  describe '#reveal_magic_element' do
+  describe '#reveal_hidden_value' do
     context 'when the game is won' do
       it 'returns the magic element' do
         allow(game).to receive(:won?).and_return(true)
 
-        expect(game.reveal_magic_element).to_not be_nil
+        expect(game.reveal_hidden_value).to_not be_nil
       end
     end
 
@@ -138,13 +138,13 @@ RSpec.describe GuessingGame do
       it 'returns the magic element' do
         allow(game).to receive(:lost?).and_return(true)
 
-        expect(game.reveal_magic_element).to_not be_nil
+        expect(game.reveal_hidden_value).to_not be_nil
       end
     end
 
     context 'when the game is not won or lost' do
       it 'returns nil' do
-        expect(game.reveal_magic_element).to be_nil
+        expect(game.reveal_hidden_value).to be_nil
       end
     end
   end

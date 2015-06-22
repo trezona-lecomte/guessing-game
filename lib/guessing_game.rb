@@ -4,7 +4,7 @@ class GuessingGame
   def initialize(range: (1..100), chances: 6)
     @range = range
     @chances_left = chances
-    @magic_element = rand(@range)
+    @hidden_value = @range.to_a.sample
     @guesses = []
   end
 
@@ -12,7 +12,7 @@ class GuessingGame
     @guesses.push(guess)
 
     if @range.include?(guess.value)
-      guess.set_result_of_comparison(other_value: @magic_element)
+      guess.set_result_of_comparison(other_value: @hidden_value)
 
       expend_chance
     end
@@ -26,8 +26,8 @@ class GuessingGame
     @chances_left == 0 && !won?
   end
 
-  def reveal_magic_element
-    @magic_element if won? || lost?
+  def reveal_hidden_value
+    @hidden_value if won? || lost?
   end
 
   private
