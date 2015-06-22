@@ -10,7 +10,6 @@ class GameController
     @ui = ui
   end
 
-  # TODO How do I test the play_game method?
   def play_game
     welcome_user
 

@@ -16,21 +16,6 @@ RSpec.describe GameController, :type => :controller do
     end
   end
 
-  # TODO find out how to test the play_game method!
-  # describe '#play_game' do
-  #   it 'gets a guess from the user' do
-  #     byebug
-  #     allow(ui).to receive(:get_guess_str).and_return('99')
-
-  #     expect(ui).to receive(:display_welcome_message)
-  #     expect(ui).to receive(:get_guess_str)
-  #     expect(game).to receive(:try_guess)
-  #     expect(ui).to receive(:display_guess_result)
-
-  #     controller.play_game
-  #   end
-  # end
-
   describe '#guess_str_from_user' do
     it 'gets a guess from the ui' do
       allow(ui).to receive(:get_guess_str).and_return('99')
