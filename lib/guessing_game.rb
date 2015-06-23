@@ -23,7 +23,7 @@ class GuessingGame
   end
 
   def lost?
-    @chances_left == 0 && !won?
+    (@chances_left == 0) && !won?
   end
 
   def reveal_hidden_value
@@ -32,8 +32,6 @@ class GuessingGame
 
   private
     def expend_chance
-      unless @chances_left == 0
-        @chances_left -= 1
-      end
+      @chances_left -= 1 unless @chances_left == 0
     end
 end
