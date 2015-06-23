@@ -1,13 +1,13 @@
-require_relative 'guess'
+require_relative "guess"
 
 class BuildGuess
 
   def self.call(range:, user_input:)
     begin
       case range.first.class.to_s
-      when 'Fixnum', 'Bignum'
+      when "Fixnum", "Bignum"
         guess = Guess.new(Integer(user_input))
-      when 'String'
+      when "String"
         guess = Guess.new(user_input)
       end
 

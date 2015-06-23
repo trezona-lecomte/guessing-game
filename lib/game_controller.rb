@@ -1,7 +1,7 @@
-require_relative 'build_guess'
-require_relative 'console_ui'
-require_relative 'guess'
-require_relative 'guessing_game'
+require_relative "build_guess"
+require_relative "console_ui"
+require_relative "guess"
+require_relative "guessing_game"
 
 class GameController
   def initialize(game:, ui:)

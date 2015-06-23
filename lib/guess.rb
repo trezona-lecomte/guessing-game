@@ -7,23 +7,23 @@ class Guess
 
   def compare_to(other_value:)
     begin
-      @result = 'too high' if @value  > other_value
-      @result = 'too low'  if @value  < other_value
-      @result = 'correct'  if @value == other_value
+      @result = "too high" if @value  > other_value
+      @result = "too low"  if @value  < other_value
+      @result = "correct"  if @value == other_value
     rescue
-      @result = 'invalid'
+      @result = "invalid"
     end
   end
 
   def too_high?
-    @result == 'too high'
+    @result == "too high"
   end
 
   def too_low?
-    @result == 'too low'
+    @result == "too low"
   end
 
   def correct?
-    @result == 'correct'
+    @result == "correct"
   end
 end
