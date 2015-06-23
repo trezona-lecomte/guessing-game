@@ -7,21 +7,21 @@ RSpec.describe Guess do
     context 'when the guess is valid' do
       context 'when the guess is too high' do
         it 'sets the result to "too high"' do
-          guess.set_result_of_comparison(other_value: 0)
+          guess.compare_to(other_value: 0)
           expect(guess.result).to eq('too high')
         end
       end
 
       context 'when the guess is too low' do
         it 'sets the result to "too low"' do
-          guess.set_result_of_comparison(other_value: 2)
+          guess.compare_to(other_value: 2)
           expect(guess.result).to eq('too low')
         end
       end
 
       context 'when the guess is correct' do
         it 'sets the result to "correct"' do
-          guess.set_result_of_comparison(other_value: 1)
+          guess.compare_to(other_value: 1)
           expect(guess.result).to eq('correct')
         end
       end
@@ -29,7 +29,7 @@ RSpec.describe Guess do
 
     context 'when the guess is invalid' do
       it 'sets the result to "invalid"' do
-        guess.set_result_of_comparison(other_value: '1')
+        guess.compare_to(other_value: '1')
         expect(guess.result).to eq('invalid')
       end
     end

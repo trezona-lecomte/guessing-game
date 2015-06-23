@@ -12,7 +12,7 @@ class GuessingGame
     @guesses.push(guess)
 
     if @range.include?(guess.value)
-      guess.set_result_of_comparison(other_value: @hidden_value)
+      guess.compare_to(other_value: @hidden_value)
 
       expend_chance
     end

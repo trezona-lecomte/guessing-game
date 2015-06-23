@@ -5,7 +5,7 @@ require 'build_guess'
 
 RSpec.describe GuessingGame do
   let(:range) { (1..100) }
-  let(:guess) { BuildGuess.call(range: range, guess_str: "1") }
+  let(:guess) { BuildGuess.call(range: range, user_input: "1") }
   let(:game)  { GuessingGame.new(range: range) }
 
   describe '#try_guess' do

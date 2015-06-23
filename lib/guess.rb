@@ -5,7 +5,7 @@ class Guess
     @value = value
   end
 
-  def set_result_of_comparison(other_value:)
+  def compare_to(other_value:)
     begin
       @result = 'too high' if @value  > other_value
       @result = 'too low'  if @value  < other_value
