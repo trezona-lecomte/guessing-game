@@ -4,7 +4,7 @@ class ConsoleUI
       puts "Welcome to the magical guessing game!"
     end
 
-    def get_guess_str(first, last)
+    def user_guess(first, last)
       puts "Please enter a guess between #{first} and #{last}"
 
       STDIN.gets.chomp

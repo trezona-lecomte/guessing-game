@@ -36,7 +36,7 @@ class GameController
     end
 
     def new_guess
-      BuildGuess.call(range: @range, user_input: @ui.get_guess_str(@range.first, @range.last))
+      BuildGuess.call(range: @range, user_input: @ui.user_guess(@range.first, @range.last))
     end
 
     def report_game_result

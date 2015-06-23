@@ -13,32 +13,32 @@ RSpec.describe ConsoleUI do
     end
   end
 
-  describe '#get_guess_str' do
+  describe '#user_guess' do
     context 'before getting the guess' do
       it 'prompts the user for their guess' do
         allow(STDIN).to receive(:gets) { "99" }
-        expect{ui.get_guess_str(range.first, range.last)}.to output("Please enter a guess between #{range.first} and #{range.last}\n").to_stdout
+        expect{ui.user_guess(range.first, range.last)}.to output("Please enter a guess between #{range.first} and #{range.last}\n").to_stdout
       end
     end
 
     context 'when given a number' do
       it 'returns a string containing the number' do
         allow(STDIN).to receive(:gets) { "99\n" }
-        expect(ui.get_guess_str(range.first, range.last)).to eq("99")
+        expect(ui.user_guess(range.first, range.last)).to eq("99")
       end
     end
 
     context 'when given a character' do
       it 'returns a string containing the character' do
         allow(STDIN).to receive(:gets) { "a\n" }
-        expect(ui.get_guess_str(range.first, range.last)).to eq('a')
+        expect(ui.user_guess(range.first, range.last)).to eq('a')
       end
     end
 
     context 'when given a blank line' do
       it 'returns a blank string' do
         allow(STDIN).to receive(:gets) { "\n" }
-        expect(ui.get_guess_str(range.first, range.last)).to eq("")
+        expect(ui.user_guess(range.first, range.last)).to eq("")
       end
     end
   end
